@@ -2,18 +2,18 @@
 An Introduction to Statistical Learning with Applications in R: Chapter III'
 ============================================================
 
-** Q:** Describe the null hypotheses to which the p-values given in Table 3.4
+**Q1:** Describe the null hypotheses to which the p-values given in Table 3.4
 correspond. Explain what conclusions you can draw based on these
 p-values. Your explanation should be phrased in terms of sales, TV,
 radio, and newspaper, rather than in terms of the coefficients of the
 linear model.
 
-** Answer: **
-Table 3.4 shows the regression statistics from predicting y = sales using TV, Radio, and Newspaper.
+**Answer:**
+Table 3.4 shows the regression statistics from predicting $y = sales$ using `TV`, `Radio`, and `Newspaper`.
 
 
-```{r}
-data <- data.frame(coef = c('$\\hat{\\beta_{0}}$ = 2.93', '$\\hat{\\beta_{1}}$ = 0.46', '$\\hat{\\beta_{2}}$ = 0.189', '$\\hat{\\beta_{3}}$ = -0.001'), 
+```{r, echo = FALSE}
+data <- data.frame(coef = c("$\\hat{\\beta_{0}}$ = 2.93", "$\\hat{\\beta_{1}}$ = 0.46", "$\\hat{\\beta_{2}}$ = 0.189", "$\\hat{\\beta_{3}}$ = -0.001"), 
 std_err = c(0.3119, 0.0014, 0.0086, 0.0059), t_stat = c( 9.42, 32.81, 21.81, -0.18),
 p_value = c('< 0.0001', '< 0.0001', '< 0.0001', '0.8599'), stringsAsFactors = FALSE)
 
@@ -24,14 +24,46 @@ library(kableExtra)
 kable(data, row.names = TRUE) %>% kable_styling(bootstrap_options = "bordered", full_width = FALSE)
 ```
 
-**(a) Intercept**
+The corresponding ***p-values*** related to the null hypotheses measure the probability of the hypotheses being true. The *hypotheses* are:
 
-The corresponding test (with null and alternative hypotheses):
+- $H_{0}: \beta_{0} = 0$, versus $H_{\alpha}: \beta_{0} \neq 0$
+- $H_{0}: \beta_{1} = 0$, versus $H_{\alpha}: \beta_{1} \neq 0$
+- $H_{0}: \beta_{2} = 0$, versus $H_{\alpha}: \beta_{2} \neq 0$
+- $H_{0}: \beta{3} = 0$, versus $H_{\alpha}: \beta_{3} \neq 0$
 
-This summation expression is in display form.
+Here,
 
-$\\sum_{i=1}^n X_i$
+$\beta_{0}$ is the intercept representing an average `sales` of the product in absence of its advertising in the media - `radio`, `TV`, and `newspaper`.<br> For its ***p-value*** $<0.0001$, we are confident able to reject the null hypothesis $\beta_{0}=0$ and accept its alternative hypothesis that $\beta_{0}$ is different from zero. Thus, we conclude that there is still some sales even when the product is not advertised in TV or radio, or newspaper.
+
+Similarly, $\beta_{1}$ represents the slope corresponding to `TV` indicating the an unit effect of TV advertising on sales, *ceteris peribus*. <br> Given an insignificant ***"p-value"*** of $\beta_{1}$, we accept alternative hypothesis, $H_{\alpha}: \beta_{1} \neq 0$, and say that TV advertising has a significant effect on the product sales. Similar explanation is valid for `radio` indicating that `radio` advertising holds a significant effect on the product sales.
+
+However, a large ***p-value*** for $\beta_{3}$ indicates that it is highly likely for ${\beta_{3}}$ to be equal to zero, further suggesting that the newspaper budget for advertising does not hold a significant impact on the product-sales. 
+
+**Q2:** Carefully explain the differences between the KNN classifier and KNN regression methods.
+
+**Answer:** The differences between the KNN classifier and KNN regression methods stems from the nature of the variable - while KNN classifier pertains to the categorical variable, KNN regression methods is used to predict numeric responses (continuous variable).
+
+As has been described in the text book (ISLR), the Nearest Neighbor prediction is used to predict the outcome variable $x_{0}$ for the given *K* number of nearest neighbors to $x_{0}$ in the given training data set.
+
+**KNN Classifier** deals with the problem in a classification setting. <br> For a positive interger *K* and a test observation $x_{0}$, the KNN classifier first identifies the K points in the training data that are closest to $x_{0}$, represented by $\mathit{N}_{0}$. The classifier then estimates the conditional probability for class $j$ as the fraction of points in $\mathit{N}_{0}$ whose response values equals j. <br> i.e., <br> $$Pr (Y = j \mid X = x_{0}) = \frac{1}{\mathit K}\sum_{\mathrm{i}\in \mathit{N}_{0}}\mathit{I}(y_{i} = j)$$
+
+Ultimately, KNN applies Bayes rule and classifies the test observation $x_{0}$ to the calss with largest probability.
+
+**KNN regression** is a non-parametric regression method that attempt to predict the value $x_{0}$ corresponding to the given set of predictors by identifying the *K* training observations that are closet to $x_{0}$, represented by $\mathit{N}_{0}$. KNN regression then estimates $\mathit{f}(x_{0})$ using the average of all the training responses in $\mathit{N}_{0}$. In other words, $$\hat\mathit{f}(x_{0})$$
 
 
 
-```{r}
+
+
+
+
+
+
+= \frac{1}{\mathit{K}}\sum_{x_{i\in\mathit{N_{0}}}}\mathit{y_{i}}
+
+
+
+
+
+
+
