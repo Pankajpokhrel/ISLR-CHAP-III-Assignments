@@ -49,7 +49,7 @@ As has been described in the text book (ISLR), the Nearest Neighbor prediction i
 
 Ultimately, KNN applies Bayes rule and classifies the test observation $x_{0}$ to the calss with largest probability.
 
-**KNN regression** is a non-parametric regression method that attempt to predict the value $x_{0}$ corresponding to the given set of predictors by identifying the *K* training observations that are closet to $x_{0}$, represented by $\mathit{N}_{0}$. KNN regression then estimates $\mathit{f}(x_{0})$ using the average of all the training responses in $\mathit{N}_{0}$. In other words, $$\mathit{\hat{\mathit{f}}}(x_{0})= \frac{1}{\mathit{K}}\sum_{x_{i\in\mathit{N_{0}}}}\mathit{y_{i}}$$
+**KNN regression** is a non-parametric regression method that attempts to predict the value $x_{0}$ corresponding to the given set of predictors by identifying the *K* training observations that are closet to $x_{0}$, represented by $\mathit{N}_{0}$. KNN regression then estimates $\mathit{f}(x_{0})$ using the average of all the training responses in $\mathit{N}_{0}$. In other words, $$\mathit{\hat{\mathit{f}}}(x_{0})= \frac{1}{\mathit{K}}\sum_{x_{i\in\mathit{N_{0}}}}\mathit{y_{i}}$$
 
 
 
